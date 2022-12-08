@@ -61,7 +61,6 @@ void PenduloInvertido::setSpeed(int pwm){
 
 void PenduloInvertido::stop(){
     Serial.println("Parado");
-    SerialBT.println("Iniciado");
 
 	digitalWrite(in1A, LOW); 
 	digitalWrite(in2A, LOW); 
@@ -74,7 +73,6 @@ void PenduloInvertido::stop(){
 
 void PenduloInvertido::start(){
     Serial.println("Iniciado");
-    SerialBT.println("Iniciado");
     start_condition = true;
 }
 
