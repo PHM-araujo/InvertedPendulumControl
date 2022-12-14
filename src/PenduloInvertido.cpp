@@ -110,15 +110,9 @@ void PenduloInvertido::controle(){
     float angle = giroscopio.readAngle();
 
     if(angle >= 0){
-        if(!dir){
-            dir = 1;
-            setMotorBackward();
-        } 
-    } else{
-        if(dir){
-            dir = 0;
-            setMotorForward();
-        } 
+        setMotorBackward();
+    }else{
+        setMotorForward();
     }
 
     speed = abs(angle)*kp;
