@@ -25,7 +25,7 @@ class PenduloInvertido
         int in1B = 26;
         int in2B = 27;
 
-        int kp = 8;
+        int kp = 15;
 
 
         bool start_condition = true;
