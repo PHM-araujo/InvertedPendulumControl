@@ -19,18 +19,16 @@ class PenduloInvertido
         int pwmA = 13;
         int in1A = 32;
         int in2A = 33;
+
         // Motor B
         int pwmB = 14;
         int in1B = 26;
         int in2B = 27;
-        // Display de 8 segmentos
-        int data = 4;
-        int clk = 2;
-        int load = 15;
+
+        int kp = 8;
 
 
-
-        bool start_condition = false;
+        bool start_condition = true;
 
         unsigned long countTime;
 

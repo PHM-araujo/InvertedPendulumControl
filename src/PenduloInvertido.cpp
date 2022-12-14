@@ -1,4 +1,5 @@
 # include "PenduloInvertido.h"
+# include "math.h"
 
 PenduloInvertido::PenduloInvertido()
 {
@@ -104,7 +105,28 @@ void PenduloInvertido::comunicaSerial(){
 }
 
 void PenduloInvertido::controle(){
-    SerialBT.println("Executando controle");
+    int speed;
+
+    float angle = giroscopio.readAngle();
+    Serial.print("Valor de angulo: ");
+    Serial.println(angle);
+
+    if(angle >= 0){
+        Serial.print("Tras");
+        setMotorBackward();
+    } else{
+        Serial.print("Frente");
+        setMotorForward();
+    }
+
+    speed = abs(angle)*kp;
+
+    Serial.print("Velocidade ");
+    Serial.println(speed);
+
+    if (speed > 255) speed = 255;
+
+    setSpeed(speed);
 }
 
 void PenduloInvertido::sendGiroData(){
@@ -116,13 +138,13 @@ void PenduloInvertido::sendGiroData(){
 
 void PenduloInvertido::testeGiro(){
     Serial.println(giroscopio.readAngle());
-    delay(1000);
+    delay(2000);
 }
-
 
 void PenduloInvertido::testeMotores(){
     setMotorForward();
-    setSpeed(100);
+    setSpeed(255);
 
     delay(10000);
 }
+

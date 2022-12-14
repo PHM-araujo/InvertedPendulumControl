@@ -16,10 +16,16 @@ void setup() {
  
 void loop(){
 
+	//penduloInvertido.testeMotores();
+	//penduloInvertido.testeGiro();
+
 	penduloInvertido.comunicaSerial();
 	penduloInvertido.sendGiroData();
 
-	// TODO fazer metodo de controle
+	
 	if(penduloInvertido.isStarted()) penduloInvertido.controle();
 
+	delay(1000);
+	
+	
 }
