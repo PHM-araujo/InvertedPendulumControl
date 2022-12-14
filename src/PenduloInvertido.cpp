@@ -54,8 +54,8 @@ void PenduloInvertido::setMotorBackward(){
 }
 
 void PenduloInvertido::setSpeed(int pwm){
-    Serial.print("PWM nos motores: ");
-    Serial.println(pwm);
+    //Serial.print("PWM nos motores: ");
+    //Serial.println(pwm);
     analogWrite(pwmA, pwm);
     analogWrite(pwmB, pwm);
 }
@@ -108,21 +108,20 @@ void PenduloInvertido::controle(){
     int speed;
 
     float angle = giroscopio.readAngle();
-    Serial.print("Valor de angulo: ");
-    Serial.println(angle);
 
     if(angle >= 0){
-        Serial.print("Tras");
-        setMotorBackward();
+        if(!dir){
+            dir = 1;
+            setMotorBackward();
+        } 
     } else{
-        Serial.print("Frente");
-        setMotorForward();
+        if(dir){
+            dir = 0;
+            setMotorForward();
+        } 
     }
 
     speed = abs(angle)*kp;
-
-    Serial.print("Velocidade ");
-    Serial.println(speed);
 
     if (speed > 255) speed = 255;
 

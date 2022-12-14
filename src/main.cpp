@@ -25,7 +25,8 @@ void loop(){
 	
 	if(penduloInvertido.isStarted()) penduloInvertido.controle();
 
-	delay(1000);
+	delay(100);
+
 	
 	
 }

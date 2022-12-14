@@ -27,8 +27,13 @@ class PenduloInvertido
 
         int kp = 15;
 
+        // Direção
+        // 0 -> Frente
+        // 1 -> Tras
+        bool dir = 1;
 
-        bool start_condition = true;
+
+        bool start_condition = false;
 
         unsigned long countTime;
 
