@@ -16,6 +16,10 @@ class RotationSensor{
         void init();
 
         float readAngle();
+
+        void testRotSensor();
+
+        void testDisplay();
 };
 
 #endif

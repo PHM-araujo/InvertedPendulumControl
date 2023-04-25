@@ -15,13 +15,9 @@ void setup() {
 }
  
 void loop(){
-
-	//penduloInvertido.testeMotores();
-	//penduloInvertido.testeGiro();
+	penduloInvertido.test();
 
 	penduloInvertido.comunicaSerial();
-	penduloInvertido.sendGiroData();
-
 	
 	if(penduloInvertido.isStarted()) penduloInvertido.controle();
 

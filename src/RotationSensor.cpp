@@ -10,3 +10,6 @@ void RotationSensor::init(){
 
 float RotationSensor::readAngle(){
 }
+
+void RotationSensor::testRotSensor(){
+}

@@ -4,7 +4,9 @@
 #include "BluetoothSerial.h"
 #include <Arduino.h>
 #include <Wire.h>
-#include "Giroscopio.h"
+#include "Display.h"
+#include "MotorDrive.h"
+#include "RotationSensor.h"
 
 class PenduloInvertido
 {
@@ -13,12 +15,9 @@ class PenduloInvertido
         // App
         BluetoothSerial SerialBT;
         String command = "";
-
-        //! Ajeitar pinos dos motores 
-        // Pinos Motor
-        int pwmA = 13;
-        int in1A = 32;
-        int in2A = 33;
+        MotorDrive motor;
+        Display display;
+        RotationSensor sensor;
 
         int kp = 15;
 
@@ -36,7 +35,6 @@ class PenduloInvertido
 
     public:
         // Atributos públicos
-        Giroscopio giroscopio = Giroscopio();
 
         // Métodos 
         PenduloInvertido();
@@ -46,20 +44,12 @@ class PenduloInvertido
         void initBluetooth();
         void msgHandler();
         void comunicaSerial();
-        void sendGiroData();
-
-        void setMotorForward();
-        void setMotorBackward();
-        void setSpeed(int pwm);
-
-        void stop();
         void start();
 
         bool isStarted();
 
         void controle();
 
-        void testeMotores(); 
 
 
 };
