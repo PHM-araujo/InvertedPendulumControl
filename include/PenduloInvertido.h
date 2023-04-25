@@ -14,16 +14,11 @@ class PenduloInvertido
         BluetoothSerial SerialBT;
         String command = "";
 
-        // Pinos 
-        // Motor A
+        //! Ajeitar pinos dos motores 
+        // Pinos Motor
         int pwmA = 13;
         int in1A = 32;
         int in2A = 33;
-
-        // Motor B
-        int pwmB = 14;
-        int in1B = 26;
-        int in2B = 27;
 
         int kp = 15;
 
@@ -64,7 +59,6 @@ class PenduloInvertido
 
         void controle();
 
-        void testeGiro();
         void testeMotores(); 
 
 
