@@ -5,14 +5,26 @@
 #include <Wire.h>
 
 
+/*
+ESP32           Driver
+12V     -       B+
+GND     -       B-
+Motor   -       M+
+Motor   -       M-
+3.3V    -      REN  
+3.3V    -      LEN
+3.3V    -      VCC
+GND     -      GND
+RX2     -      RPWM
+TX2     -      LPWM
+*/
+
+
 class MotorDrive{
     private:
     
-    //! Ajeitar pinos dos motores 
-    // Pinos Motor
-    int pwmA = 13;
-    int in1A = 32;
-    int in2A = 33;
+    unsigned char Rpwm = 16;
+    unsigned char Lpwm = 17;
 
     public: 
 

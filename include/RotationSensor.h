@@ -6,7 +6,7 @@
 
 /*
 ESP32           SENSOR
-VIN     -       VCC
+VIN(5V) -       VCC
 GND     -       GND
 D23     -       DIR 
 D21     -       SDA
