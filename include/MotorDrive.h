@@ -30,8 +30,6 @@ class MotorDrive{
 
         MotorDrive();
 
-        void init();
-
         void setSpeed(int pwm);
 
         void stop();
