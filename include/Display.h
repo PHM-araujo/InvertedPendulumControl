@@ -18,8 +18,6 @@ GND     -       RW(5)
 27      -       D7(14)
 */
 
-LiquidCrystal lcd(13, 14, 33, 25, 26, 27);
-
 class Display{
     private:
 
@@ -28,6 +26,8 @@ class Display{
         Display();
 
         void testDisplay();
+
+        void print(String msg);
 };
 
 #endif

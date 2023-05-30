@@ -50,6 +50,8 @@ class PenduloInvertido
 
         void controle();
 
+        void teste();
+
 
 
 };

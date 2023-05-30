@@ -15,12 +15,12 @@ void setup() {
 }
  
 void loop(){
-	penduloInvertido.test();
 
-	penduloInvertido.comunicaSerial();
-	
-	if(penduloInvertido.isStarted()) penduloInvertido.controle();
+	// penduloInvertido.test();
 
+	// penduloInvertido.comunicaSerial();
 	
+	// if(penduloInvertido.isStarted()) penduloInvertido.controle();
 	
+	penduloInvertido.teste();
 }

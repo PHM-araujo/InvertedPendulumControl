@@ -11,6 +11,10 @@ void PenduloInvertido::init(){
 
     SerialBT.println("Pêndulo iniciado");
     digitalWrite(2, HIGH);
+
+	pinMode(16, OUTPUT);
+    pinMode(17, OUTPUT);
+
 }
 
 void PenduloInvertido::initBluetooth(){
@@ -53,4 +57,11 @@ void PenduloInvertido::comunicaSerial(){
 
 void PenduloInvertido::controle(){
 
+}
+
+void PenduloInvertido::teste(){
+	motor.testeDrive();
+	//sensor.testRotSensor();
+	//display.testDisplay();
+	//delay(1000);
 }

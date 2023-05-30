@@ -5,18 +5,17 @@
 #include <Wire.h>
 
 
-/*
+/* DRV8833
 ESP32           Driver
-12V     -       B+
-GND     -       B-
-Motor   -       M+
-Motor   -       M-
-3.3V    -      REN  
-3.3V    -      LEN
+Motor   -      A01
+Motor   -      A02
+12V     -      VM
 3.3V    -      VCC
 GND     -      GND
-RX2     -      RPWM
-TX2     -      LPWM
+D4      -      PWMA
+RX2     -      AIN2
+TX2     -      AIN1
+STBY    -      3.3v
 */
 
 
