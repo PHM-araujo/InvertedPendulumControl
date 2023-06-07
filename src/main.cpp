@@ -1,9 +1,5 @@
 #include "PenduloInvertido.h"
 
-#if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
-#error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
-#endif
-
 
 PenduloInvertido penduloInvertido = PenduloInvertido();
 
@@ -15,12 +11,5 @@ void setup() {
 }
  
 void loop(){
-
-	// penduloInvertido.test();
-
-	// penduloInvertido.comunicaSerial();
-	
-	// if(penduloInvertido.isStarted()) penduloInvertido.controle();
-	
 	penduloInvertido.teste();
 }

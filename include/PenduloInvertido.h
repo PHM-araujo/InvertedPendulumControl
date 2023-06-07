@@ -1,23 +1,16 @@
 #ifndef _PENDULOINVERTIDO_
 #define _PENDULOINVERTIDO_
 
-#include "BluetoothSerial.h"
 #include <Arduino.h>
-#include <Wire.h>
-#include "Display.h"
-#include "MotorDrive.h"
 #include "RotationSensor.h"
+#include "MotorDrive.h"
 
 class PenduloInvertido
 {
 
     private:
-        // App
-        BluetoothSerial SerialBT;
-        String command = "";
+        RotationSensor sensor_rotacao;
         MotorDrive motor;
-        Display display;
-        RotationSensor sensor;
 
         int kp = 15;
 
@@ -28,10 +21,7 @@ class PenduloInvertido
 
 
         bool start_condition = false;
-
         unsigned long countTime;
-
-        unsigned long timeToSend = 1500;
 
     public:
         // Atributos públicos
@@ -41,9 +31,6 @@ class PenduloInvertido
 
         void init();
 
-        void initBluetooth();
-        void msgHandler();
-        void comunicaSerial();
         void start();
 
         bool isStarted();

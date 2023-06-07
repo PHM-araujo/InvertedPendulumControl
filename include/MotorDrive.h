@@ -1,33 +1,28 @@
 #ifndef _MOTORDRIVE_
 #define _MOTORDRIVE_
 
-#include <Arduino.h>
-#include <Wire.h>
-
 
 /* DRV8833
 ESP32           Driver
 Motor   -      A01
 Motor   -      A02
 12V     -      VM
-3.3V    -      VCC
+3.3V    -      STBY
 GND     -      GND
-D4      -      PWMA
-RX2     -      AIN2
-TX2     -      AIN1
-STBY    -      3.3v
+26     -      AIN2
+25     -      AIN1
 */
 
 
 class MotorDrive{
     private:
     
-    unsigned char Rpwm = 16;
-    unsigned char Lpwm = 17;
+    unsigned char AIN2 = 26;
+    unsigned char AIN1 = 25;
 
     public: 
 
-        MotorDrive();
+        void init();
 
         void setSpeed(int pwm);
 
