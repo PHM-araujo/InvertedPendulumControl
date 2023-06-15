@@ -4,6 +4,7 @@
 #include <Arduino.h>
 #include "RotationSensor.h"
 #include "MotorDrive.h"
+#include "UltrasonicSensor.h"
 
 class PenduloInvertido
 {
@@ -11,6 +12,7 @@ class PenduloInvertido
     private:
         RotationSensor sensor_rotacao;
         MotorDrive motor;
+        UltrasonicSensor sensor_ultrasonico;
 
         int kp = 15;
 

@@ -29,15 +29,15 @@ void MotorDrive::stop(){
 
 void MotorDrive::testeDrive(){
     Serial.println("Motor girando para direita");
-    analogWrite(AIN2, 255);
+    analogWrite(AIN2, 200);
     analogWrite(AIN1, 0);
-    delay(1000);
+    delay(100);
 
     Serial.println("Motor girando para esquerda");
-    analogWrite(AIN1, 255);
+    analogWrite(AIN1, 200);
     analogWrite(AIN2, 0);
-    delay(1000);
+    delay(100);
 
     stop();
-    delay(5000);
+    delay(100);
 }

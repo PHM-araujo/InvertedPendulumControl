@@ -7,6 +7,7 @@ void PenduloInvertido::init(){
 
 	sensor_rotacao.init();
     motor.init();
+    sensor_ultrasonico.init();
 
 }
 
@@ -25,6 +26,8 @@ void PenduloInvertido::controle(){
 
 void PenduloInvertido::teste(){
 	//sensor_rotacao.readAngle();
+    //! Testar 
     motor.testeDrive();
-	//delay(1000);
+    //Serial.println(sensor_ultrasonico.readDistance());
+	//delay(100);
 }

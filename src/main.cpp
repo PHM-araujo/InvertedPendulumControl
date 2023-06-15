@@ -1,6 +1,5 @@
 #include "PenduloInvertido.h"
 
-
 PenduloInvertido penduloInvertido = PenduloInvertido();
 
 
