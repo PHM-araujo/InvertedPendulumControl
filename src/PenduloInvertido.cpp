@@ -25,8 +25,8 @@ void PenduloInvertido::controle(){
 }
 
 void PenduloInvertido::teste(){
-	//sensor_rotacao.readAngle();
-    motor.testeDrive();
+	Serial.println(sensor_rotacao.readAngle());
+    //motor.testeDrive();
     //Serial.println(sensor_ultrasonico.readDistance());
-	//delay(100);
+	delay(100);
 }

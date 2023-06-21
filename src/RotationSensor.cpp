@@ -18,12 +18,12 @@ void RotationSensor::init(){
     delay(1000);
 
     Serial.println("Sensor iniciado");
+
+    // Posição inicial
+    as5600.resetCumulativePosition(0);
 }
 
 
 float RotationSensor::readAngle(){
-    Serial.print("\tω = ");
-    Serial.println(as5600.getAngularSpeed(AS5600_MODE_RPM));
-    return as5600.getAngularSpeed(AS5600_MODE_RPM);
-
+    return as5600.getCumulativePosition() / angle_max;
 }
