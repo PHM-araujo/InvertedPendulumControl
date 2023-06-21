@@ -15,34 +15,22 @@ class PenduloInvertido
         UltrasonicSensor sensor_ultrasonico;
 
         int kp = 15;
-
-        // Direção
-        // 0 -> Frente
-        // 1 -> Tras
         bool dir = 1;
-
-
         bool start_condition = false;
         unsigned long countTime;
+        int dist_max = 273;
+        int dist_min = 40;
 
     public:
-        // Atributos públicos
 
-        // Métodos 
         PenduloInvertido();
-
         void init();
-
         void start();
-
         bool isStarted();
-
         void controle();
-
         void teste();
-
-
-
+        bool outOfRange();
+        void stop();
 };
 
 

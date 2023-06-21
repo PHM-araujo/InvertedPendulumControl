@@ -10,5 +10,10 @@ void setup() {
 }
  
 void loop(){
-	penduloInvertido.teste();
+	//penduloInvertido.teste();
+
+	if (penduloInvertido.outOfRange()){
+		penduloInvertido.stop();
+	}
+	delay(100);
 }

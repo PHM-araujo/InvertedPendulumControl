@@ -24,7 +24,6 @@ class RotationSensor{
     public: 
 
         void init();
-
         float readAngle();
 };
 

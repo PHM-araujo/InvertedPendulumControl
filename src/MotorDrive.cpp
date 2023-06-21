@@ -20,7 +20,6 @@ void MotorDrive::setSpeed(int pwm){
 }
 
 void MotorDrive::stop(){
-    Serial.println("Parada total");
 
 	analogWrite(AIN2, 0); 
 	analogWrite(AIN1, 0); 
