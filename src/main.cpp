@@ -6,14 +6,15 @@ PenduloInvertido penduloInvertido = PenduloInvertido();
 void setup() {
 	Serial.begin(115200);
 	penduloInvertido.init();
-   
 }
  
 void loop(){
-	//penduloInvertido.teste();
 
-	if (penduloInvertido.outOfRange()){
-		penduloInvertido.stop();
+	penduloInvertido.teste();
+
+	if(penduloInvertido.isStarted()){
+		if (penduloInvertido.outOfRange()){
+			penduloInvertido.stop();
+		}
 	}
-	delay(100);
 }

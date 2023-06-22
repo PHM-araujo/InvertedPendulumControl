@@ -16,10 +16,12 @@ class PenduloInvertido
 
         int kp = 15;
         bool dir = 1;
-        bool start_condition = false;
+        bool start_condition;
         unsigned long countTime;
         int dist_max = 273;
         int dist_min = 40;
+        int pos_home = 150;
+        int pos;
 
     public:
 
@@ -31,6 +33,8 @@ class PenduloInvertido
         void teste();
         bool outOfRange();
         void stop();
+
+        void returnHome();
 };
 
 

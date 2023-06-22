@@ -10,9 +10,11 @@ void MotorDrive::init(){
 
 void MotorDrive::setSpeed(int pwm){
     if(pwm >= 0){
+        // Direita
         analogWrite(AIN2, pwm);
         analogWrite(AIN1, LOW);
     }else{
+        //Esquerda
         pwm = -1*pwm;
         analogWrite(AIN1, pwm);
         analogWrite(AIN2, LOW);
@@ -28,15 +30,13 @@ void MotorDrive::stop(){
 
 void MotorDrive::testeDrive(){
     Serial.println("Motor girando para direita");
-    analogWrite(AIN2, 200);
-    analogWrite(AIN1, 0);
-    delay(100);
+    setSpeed(255);
+    delay(500);
 
     Serial.println("Motor girando para esquerda");
-    analogWrite(AIN1, 200);
-    analogWrite(AIN2, 0);
-    delay(100);
+    setSpeed(-255);
+    delay(500);
 
     stop();
-    delay(100);
+    delay(5000);
 }
