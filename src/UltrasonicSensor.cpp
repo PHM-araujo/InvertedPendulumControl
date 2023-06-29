@@ -10,3 +10,11 @@ int UltrasonicSensor::readDistance(){
     double* distances = HCSR04.measureDistanceMm();
 	return distances[0];
 }
+
+// float UltrasonicSensor::readVelocity(){
+    
+// }
+
+// float UltrasonicSensor::readAceleration(){
+
+// }

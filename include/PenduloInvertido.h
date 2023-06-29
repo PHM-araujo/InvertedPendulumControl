@@ -5,6 +5,7 @@
 #include "RotationSensor.h"
 #include "MotorDrive.h"
 #include "UltrasonicSensor.h"
+#include "Controlador.h"
 
 class PenduloInvertido
 {
@@ -13,28 +14,37 @@ class PenduloInvertido
         RotationSensor sensor_rotacao;
         MotorDrive motor;
         UltrasonicSensor sensor_ultrasonico;
+        Controlador controlador = Controlador(15, 0, 0);
 
-        int kp = 15;
-        bool dir = 1;
-        bool start_condition;
-        unsigned long countTime;
+
+        bool start_condition = false;
         int dist_max = 273;
         int dist_min = 40;
         int pos_home = 150;
-        int pos;
+        unsigned long samplingTime = 100;
+        unsigned long execTime = 0;
+        float ref = 0;
 
     public:
 
         PenduloInvertido();
+
+
         void init();
         void start();
         bool isStarted();
-        void controle();
+
         void teste();
         bool outOfRange();
         void stop();
 
+        void controle();
+
         void returnHome();
+
+        void behavior(String msg);
+
+        void readGanhos(String msg);
 };
 
 

@@ -8,17 +8,16 @@
 class Controlador{
     private:
     
-    //! Ajeitar pinos dos motores 
-    // Pinos Motor
-    int pwmA = 13;
-    int in1A = 32;
-    int in2A = 33;
+    float kp, kd, ki;
+
+    float erro_k1, erro_k2, atuation_k1;
 
     public: 
 
-        Controlador();
-
-        void PID();
+        Controlador(float KP, float KD, float KI);
+        int PID(float erro);
+        void setGanhos(float Kp, float Kd, float Ki);
+        void resetConditions();
 };
 
 #endif

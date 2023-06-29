@@ -20,6 +20,10 @@ class UltrasonicSensor{
         void init();
 
         int readDistance();
+
+        float readAceleration();
+
+        float readVelocity();
 };
 
 #endif

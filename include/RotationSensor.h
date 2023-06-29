@@ -19,12 +19,13 @@ class RotationSensor{
     private:
     AS5600 as5600;
 
-    float angle_max = 31.2;
+    float angle_max = 67.38;
 
     public: 
 
         void init();
         float readAngle();
+        void calibSensor();
 };
 
 #endif
