@@ -14,37 +14,38 @@ class PenduloInvertido
         RotationSensor sensor_rotacao;
         MotorDrive motor;
         UltrasonicSensor sensor_ultrasonico;
-        Controlador controlador = Controlador(15, 0, 0);
+        Controlador controlador = Controlador(67,11, 12.5);
 
 
         bool start_condition = false;
-        int dist_max = 273;
-        int dist_min = 40;
-        int pos_home = 150;
-        unsigned long samplingTime = 100;
-        unsigned long execTime = 0;
         float ref = 0;
+
+        // Variaveis de posição
+        int dist_max = 273;
+        int dist_min = 30;
+        int pos_home = 150;
+
+        // Timers 
+        unsigned long samplingTime = 5;
+        unsigned long execTime = 0;
+
+        // Metodos auxiliares
+        void readGanhos(String msg);
 
     public:
 
         PenduloInvertido();
 
-
+        void controle();
         void init();
         void start();
         bool isStarted();
-
         void teste();
         bool outOfRange();
         void stop();
-
-        void controle();
-
         void returnHome();
-
         void behavior(String msg);
 
-        void readGanhos(String msg);
 };
 
 

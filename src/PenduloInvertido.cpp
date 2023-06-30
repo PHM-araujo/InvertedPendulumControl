@@ -30,6 +30,11 @@ bool PenduloInvertido::outOfRange(){
         Serial.println("Out");
         return true;
     } 
+
+    if(pos < 0){
+        Serial.println("Valor inválido");
+        return true;
+    }
     
     return false;
 }
@@ -68,8 +73,13 @@ void PenduloInvertido::controle(){
     if (!execTime) execTime = millis();
 	else if(millis() - execTime >= samplingTime){
 		execTime = 0;
-        
-        float erro = ref - sensor_rotacao.readAngle();
+
+        float leitura = sensor_rotacao.readAngle();
+
+        // Checa se é uma leitura válida
+        if (leitura > 50) stop();
+                
+        float erro = ref - leitura;
 
 		int atuation = controlador.PID(erro);
         Serial.print(atuation);
@@ -128,10 +138,16 @@ void PenduloInvertido::readGanhos(String msg){
 }
 
 void PenduloInvertido::teste(){
-	Serial.print(sensor_rotacao.readAngle());
-    Serial.print("    ");
+
+    // Serial.print("Angle:");
+	// Serial.print(sensor_rotacao.readAngle());
+    // Serial.print(",");
+    // Serial.print("Kalman_filter:");
+	// Serial.println(angleKalmanFilter.updateEstimate(sensor_rotacao.readAngle()));
+
+
     //motor.testeDrive();
-    Serial.println(sensor_ultrasonico.readDistance());
-	//delay(100);
+    //Serial.println(sensor_ultrasonico.readDistance());
+	delay(5);
 }
 

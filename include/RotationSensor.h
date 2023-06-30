@@ -25,6 +25,7 @@ class RotationSensor{
 
         void init();
         float readAngle();
+
         void calibSensor();
 };
 

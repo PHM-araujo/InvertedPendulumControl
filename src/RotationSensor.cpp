@@ -1,6 +1,8 @@
 #include "RotationSensor.h"
 #include <Arduino.h>
 
+// #include "SimpleKalmanFilter.h"
+// SimpleKalmanFilter angleKalmanFilter(1, 1, 0.01);
 
 void RotationSensor::init(){
     // Inicia comunicação I2C
@@ -19,6 +21,8 @@ void RotationSensor::init(){
 }
 
 float RotationSensor::readAngle(){
+
+    // return angleKalmanFilter.updateEstimate(readAngle());
     return as5600.getCumulativePosition() / angle_max;
 }
 
