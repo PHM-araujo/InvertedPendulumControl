@@ -137,6 +137,31 @@ void PenduloInvertido::readGanhos(String msg){
     controlador.setGanhos(Kp, Kd, Ki);
 }
 
+void PenduloInvertido::teco(){
+    int pos = sensor_ultrasonico.readDistance();
+
+    // Bloqueia o teco por um temoi
+    deu_teco = true;
+    disable_teco = millis();
+
+    if(pos <= 40){
+        motor.setSpeed(-200);
+    }else if(pos >= 260){
+        motor.setSpeed(200);
+    }
+
+    delay(10);
+}
+
+bool PenduloInvertido::getTeco(){
+    return deu_teco;
+}
+
+void PenduloInvertido::enableTeco(){
+    if(millis() - disable_teco > 1000) deu_teco = false;
+}
+
+
 void PenduloInvertido::teste(){
 
     // Serial.print("Angle:");

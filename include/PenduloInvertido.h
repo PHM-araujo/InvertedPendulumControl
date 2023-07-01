@@ -18,6 +18,8 @@ class PenduloInvertido
 
 
         bool start_condition = false;
+        bool deu_teco = false;
+
         float ref = 0;
 
         // Variaveis de posição
@@ -26,6 +28,7 @@ class PenduloInvertido
         int pos_home = 150;
 
         // Timers 
+        unsigned long disable_teco = 0;
         unsigned long samplingTime = 5;
         unsigned long execTime = 0;
 
@@ -42,9 +45,12 @@ class PenduloInvertido
         bool isStarted();
         void teste();
         bool outOfRange();
+        void teco();
         void stop();
         void returnHome();
         void behavior(String msg);
+        bool getTeco();
+        void enableTeco();
 
 };
 
