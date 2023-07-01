@@ -23,11 +23,8 @@ void loop(){
 		penduloInvertido.controle();
 
 		// Checa se é necessário dar um teco
-		if(!penduloInvertido.getTeco()){
-			penduloInvertido.teco();
-		}else{
-			// Checa se pode habilitar o teco
-			penduloInvertido.enableTeco();
+		if(penduloInvertido.enableChangeDir()){
+			penduloInvertido.changeDirection();
 		}
 
 		// Checa se o piloto está na área permitida

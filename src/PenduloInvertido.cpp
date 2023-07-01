@@ -137,12 +137,11 @@ void PenduloInvertido::readGanhos(String msg){
     controlador.setGanhos(Kp, Kd, Ki);
 }
 
-void PenduloInvertido::teco(){
+void PenduloInvertido::changeDirection(){
     int pos = sensor_ultrasonico.readDistance();
 
-    // Bloqueia o teco por um temoi
-    deu_teco = true;
-    disable_teco = millis();
+    // Inicia o timer que vai desabilita a mudança de direção
+    en_dir = millis();
 
     if(pos <= 40){
         motor.setSpeed(-200);
@@ -153,12 +152,10 @@ void PenduloInvertido::teco(){
     delay(10);
 }
 
-bool PenduloInvertido::getTeco(){
-    return deu_teco;
-}
+bool PenduloInvertido:: enableChangeDir(){
+    if(millis() - en_dir >= 1000) return true;
 
-void PenduloInvertido::enableTeco(){
-    if(millis() - disable_teco > 1000) deu_teco = false;
+    return false;
 }
 
 

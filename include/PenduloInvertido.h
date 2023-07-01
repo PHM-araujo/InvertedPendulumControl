@@ -28,7 +28,7 @@ class PenduloInvertido
         int pos_home = 150;
 
         // Timers 
-        unsigned long disable_teco = 0;
+        unsigned long en_dir = 0;
         unsigned long samplingTime = 5;
         unsigned long execTime = 0;
 
@@ -45,12 +45,11 @@ class PenduloInvertido
         bool isStarted();
         void teste();
         bool outOfRange();
-        void teco();
         void stop();
         void returnHome();
         void behavior(String msg);
-        bool getTeco();
-        void enableTeco();
+        void changeDirection();
+        bool enableChangeDir();
 
 };
 
