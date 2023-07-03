@@ -63,9 +63,9 @@ void PenduloInvertido::returnHome(){
             motor.setSpeed(-125);
         }
 
+        delay(5);
         pos = sensor_ultrasonico.readDistance();
         Serial.println(pos);
-        delay(5);
     }
     Serial.println("Voltei home");
     motor.stop();
@@ -73,7 +73,7 @@ void PenduloInvertido::returnHome(){
 
 void PenduloInvertido::controle(){
 
-    if (!execTime) execTime = millis();
+    if (!execTime) execTime = millis();     
 	else if(millis() - execTime >= samplingTime){
 		execTime = 0;
 
@@ -99,7 +99,10 @@ void PenduloInvertido::behavior(String msg){
     switch (msg[0])
     {
     case 'I':
-        start();
+        //start();
+        //teste_Acomodacao();
+        //teste_LeituraAng();
+        teste_PWM();
         break;
     case 'P':
         stop();
@@ -163,20 +166,88 @@ bool PenduloInvertido::enableChangeDir(){
     return false;
 }
 
-void PenduloInvertido::teste(){
+void PenduloInvertido::teste_Acomodacao(){
 
-    // Serial.print("Angle:");
-	// Serial.print(sensor_rotacao.readAngle());
-    // Serial.print(",");
-    // Serial.print("Kalman_filter:");
-	// Serial.println(angleKalmanFilter.updateEstimate(sensor_rotacao.readAngle()));
+    // Piloto na posiçao inicial - 273
 
+    int pos = sensor_ultrasonico.readDistance();
+    Serial.println(pos);
+    testeTimer = millis();
 
-    //motor.testeDrive();
-    // Serial.println(sensor_ultrasonico.readDistance());
+    while(pos > 40){
+        motor.setSpeed(255);
+        pos = sensor_ultrasonico.readDistance();
+        Serial.println(pos);
+        delay(5);
+    }
 
-    motor.setSpeed(80);
-	delay(5);
+    motor.stop();
+
+    Serial.print("Tempo de acomodação: ");
+    Serial.println(millis() - testeTimer);
+}
+
+void PenduloInvertido::teste_LeituraAng(){
+
+    // Piloto na posiçao inicial - 273
+
+    float angulos_media[13];
+
+    for(int i = 0; i <= 12; i++){
+        Serial.print("Medindo angulo ");
+        Serial.println(-30 + i*5);
+        delay(5000);
+        for(int j = 0; j < 5; j++){
+            angulos_media[i] += sensor_rotacao.readAngle()/5;
+            delay(50);
+        }
+    }
+
+    Serial.print("Média de leitura para cada angulo");
+    for(int i = 0; i < 13; i++){
+        Serial.print("Angulo ");
+        Serial.print(-30 + i*5);
+        Serial.print(" : ");
+        Serial.println(angulos_media[i]);
+    }
+}
+
+void PenduloInvertido::teste_PWM(){
+    float aceleracoes[34];
+
+    // Rotina para gerar a curva de PWM 
+    for(int i = 0; i <= 33; i++){
+        Serial.print("PWM: ");
+        Serial.println(90 + i*5);
+        while(pos < 270){
+            motor.setSpeed(-200);
+            pos = sensor_ultrasonico.readDistance();
+            delay(5);
+        }
+
+        testeTimer = millis();
+        while(pos > 40){
+            motor.setSpeed(90+i*5);
+            pos = sensor_ultrasonico.readDistance();
+            delay(5);
+        }
+
+        float time_seg = (millis() - testeTimer);
+        // Calcula a aceleraçao em mm/ms
+        aceleracoes[i] = 230/time_seg;
+
+    }
+
+    motor.stop();
+
+    // Imprimi as acelerações do piloto
+    Serial.println("Acelerações para cada valor de PWM");
+    for(int i = 0; i <= 33; i++){
+        Serial.print("PWM ");
+        Serial.print(90 + i*5);
+        Serial.print(": ");
+        Serial.println(aceleracoes[i],5);
+    }
 }
 
 void PenduloInvertido::printInformation(){

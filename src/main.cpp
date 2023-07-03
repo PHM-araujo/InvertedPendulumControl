@@ -10,8 +10,6 @@ void setup() {
  
 void loop(){
 
-	//penduloInvertido.teste();
-
 	if(Serial.available() > 0){
 		String msg = Serial.readStringUntil(';');
 		Serial.println(msg);

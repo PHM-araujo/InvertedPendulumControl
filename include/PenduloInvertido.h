@@ -36,6 +36,7 @@ class PenduloInvertido
         unsigned long en_dir = 0;
         unsigned long samplingTime = 5;
         unsigned long execTime = 0;
+        unsigned long testeTimer;
 
         // Metodos auxiliares
         void readGanhos(String msg);
@@ -56,6 +57,11 @@ class PenduloInvertido
         void behavior(String msg);
         void changeDirection();
         bool enableChangeDir();
+
+        // Testes
+        void teste_Acomodacao();
+        void teste_LeituraAng();
+        void teste_PWM();
 
 };
 

@@ -10,7 +10,6 @@ int UltrasonicSensor::readDistance(){
     double* distances = HCSR04.measureDistanceMm();
 
     while(distances[0] == -1) distances = HCSR04.measureDistanceMm();
-
     
 	return distances[0];
 }
