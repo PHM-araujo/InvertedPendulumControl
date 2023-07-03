@@ -1,5 +1,6 @@
 # include "PenduloInvertido.h"
 
+
 PenduloInvertido::PenduloInvertido(){
 }
 
@@ -8,6 +9,8 @@ void PenduloInvertido::init(){
 	sensor_rotacao.init();
     motor.init();
     sensor_ultrasonico.init();
+
+    pos = sensor_ultrasonico.readDistance();
 
 }
 
@@ -24,8 +27,7 @@ bool PenduloInvertido::isStarted(){
 }
 
 bool PenduloInvertido::outOfRange(){
-    int pos = sensor_ultrasonico.readDistance();
-
+    
     if (pos < dist_min or pos > dist_max){
         Serial.println("Out");
         return true;
@@ -47,22 +49,23 @@ void PenduloInvertido::stop(){
 }
 
 void PenduloInvertido::returnHome(){
-    int pos = sensor_ultrasonico.readDistance();
-    int home_inicial = pos_home - pos_home*0.02;
-    int home_final = pos_home + pos_home*0.02;;
+    pos = sensor_ultrasonico.readDistance();
+
+    int home_inicial = pos_home - pos_home*0.01;
+    int home_final = pos_home + pos_home*0.01;
 
     Serial.println("Voltando home ...");
     while(!(pos >= home_inicial and pos <= home_final)){
 
         if(pos > pos_home){
-            motor.setSpeed(200);
+            motor.setSpeed(125);
         }if(pos < pos_home){
-            motor.setSpeed(-200);
+            motor.setSpeed(-125);
         }
 
         pos = sensor_ultrasonico.readDistance();
         Serial.println(pos);
-        delay(2);
+        delay(5);
     }
     Serial.println("Voltei home");
     motor.stop();
@@ -74,18 +77,16 @@ void PenduloInvertido::controle(){
 	else if(millis() - execTime >= samplingTime){
 		execTime = 0;
 
-        float leitura = sensor_rotacao.readAngle();
+        pos = sensor_ultrasonico.readDistance();
 
-        // Checa se é uma leitura válida
-        if (leitura > 50) stop();
+        leitura = sensor_rotacao.readAngle();
+        //leitura = angleKalmanFilter.updateEstimate(sensor_rotacao.readAngle());
                 
         float erro = ref - leitura;
 
-		int atuation = controlador.PID(erro);
-        Serial.print(atuation);
-        Serial.print("    ");
-        Serial.println(sensor_rotacao.readAngle());
+		atuation = controlador.PID(erro);
 
+        printInformation();
 
         motor.setSpeed(atuation);
 	}
@@ -137,27 +138,30 @@ void PenduloInvertido::readGanhos(String msg){
     controlador.setGanhos(Kp, Kd, Ki);
 }
 
+//! Tem que ser otimizado
 void PenduloInvertido::changeDirection(){
-    int pos = sensor_ultrasonico.readDistance();
 
-    // Inicia o timer que vai desabilita a mudança de direção
-    en_dir = millis();
-
-    if(pos <= 40){
-        motor.setSpeed(-200);
-    }else if(pos >= 260){
-        motor.setSpeed(200);
+    if(pos <= dist_min_cd){
+        motor.setSpeed(255);
+        Serial.println("Mudei de direção");
+        // Inicia o timer que vai desabilita a mudança de direção
+        en_dir = millis();
+        delay(35);
+    }else if(pos >= dist_max_cd){
+        motor.setSpeed(-255);
+        Serial.println("Mudei de direção");
+        // Inicia o timer que vai desabilita a mudança de direção
+        en_dir = millis();
+        delay(35);
     }
 
-    delay(10);
 }
 
-bool PenduloInvertido:: enableChangeDir(){
-    if(millis() - en_dir >= 1000) return true;
+bool PenduloInvertido::enableChangeDir(){
+    if(millis() - en_dir >= 100) return true;
 
     return false;
 }
-
 
 void PenduloInvertido::teste(){
 
@@ -169,7 +173,26 @@ void PenduloInvertido::teste(){
 
 
     //motor.testeDrive();
-    //Serial.println(sensor_ultrasonico.readDistance());
+    // Serial.println(sensor_ultrasonico.readDistance());
+
+    motor.setSpeed(80);
 	delay(5);
+}
+
+void PenduloInvertido::printInformation(){
+    
+    // Informação mostrada na serial
+    Serial.print(atuation);
+    Serial.print("    ");
+    Serial.print(sensor_rotacao.readAngle());
+    Serial.print("    ");
+    Serial.println(pos);
+
+    // Informação mostrada no plotter
+    // Serial.print("Ref:");
+	// Serial.println(0);
+	// Serial.print(",");
+	// Serial.print("Angle:");
+	// Serial.println(leitura);
 }
 

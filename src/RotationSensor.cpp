@@ -1,9 +1,6 @@
 #include "RotationSensor.h"
 #include <Arduino.h>
 
-// #include "SimpleKalmanFilter.h"
-// SimpleKalmanFilter angleKalmanFilter(1, 1, 0.01);
-
 void RotationSensor::init(){
     // Inicia comunicação I2C
     Wire.begin();
@@ -22,8 +19,12 @@ void RotationSensor::init(){
 
 float RotationSensor::readAngle(){
 
-    // return angleKalmanFilter.updateEstimate(readAngle());
-    return as5600.getCumulativePosition() / angle_max;
+    float angle = as5600.getCumulativePosition() / angle_max;   
+
+    // Checa se é um valor de angulo válido
+    while(abs(angle) > 35) angle = as5600.getCumulativePosition() / angle_max;
+
+    return angle;
 }
 
 void RotationSensor::calibSensor(){
@@ -31,7 +32,7 @@ void RotationSensor::calibSensor(){
 
     // Posição inicial
     unsigned long timer = millis();
-    while(millis() - timer <= 5000){
+    while(millis() - timer <= 10){
         as5600.resetCumulativePosition(0);
     }
 

@@ -8,7 +8,7 @@ ki = 0
 kd = 0 
 
 def sendSerial(value):
-    ser = serial.Serial('COM8', baudrate=115200, timeout=1)
+    ser = serial.Serial('/dev/ttyUSB0', baudrate=115200, timeout=1)
     ser.write(value.encode())
     ser.close()
 
@@ -44,7 +44,7 @@ def pushButton_Enviar():
 
 # App Exec 
 app = QtWidgets.QApplication([])
-screen1 = uic.loadUi(r"C:\Users\pedro\OneDrive\Documentos\Github\InvertedPendulumControl\Interface\gui.ui")
+screen1 = uic.loadUi("/home/pedro/Documents/Controle/InvertedPendulumControl/Interface/gui.ui")
 
 # Pushbuttons 
 screen1.pushButton_iniciar.clicked.connect(pushButton_iniciar)

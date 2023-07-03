@@ -20,6 +20,8 @@ class MotorDrive{
     unsigned char AIN2 = 26;
     unsigned char AIN1 = 25;
 
+    int offset = 75;
+
     public: 
 
         void init();
