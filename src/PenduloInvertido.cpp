@@ -80,18 +80,13 @@ void PenduloInvertido::controle(){
         pos = sensor_ultrasonico.readDistance();
 
         leitura = sensor_rotacao.readAngle();
-        //leitura = angleKalmanFilter.updateEstimate(sensor_rotacao.readAngle());
                 
         float erro = ref - leitura;
 
-        // Força no piloto 
-		atuation = controlador.PID(erro);
-        //atuation = controlador.PD(erro);
-
+		atuation = controlador.PID(erro);           // Força no piloto 
         printInformation();
 
-        // Converter para pwm
-        //motor.setSpeed(atuation);
+        motor.setSpeed(atuation);
 	}
     
 
@@ -256,17 +251,17 @@ void PenduloInvertido::teste_PWM(){
 void PenduloInvertido::printInformation(){
     
     // Informação mostrada na serial
-    Serial.print(atuation);
-    Serial.print("    ");
-    Serial.print(sensor_rotacao.readAngle());
-    Serial.print("    ");
-    Serial.println(pos);
+    // Serial.print(atuation);
+    // Serial.print("    ");
+    // Serial.print(sensor_rotacao.readAngle());
+    // Serial.print("    ");
+    // Serial.println(pos);
 
     // Informação mostrada no plotter
-    // Serial.print("Ref:");
-	// Serial.println(0);
-	// Serial.print(",");
-	// Serial.print("Angle:");
-	// Serial.println(leitura);
+    Serial.print("Ref:");
+	Serial.println(0);
+	Serial.print(",");
+	Serial.print("Angle:");
+	Serial.println(leitura);
 }
 
