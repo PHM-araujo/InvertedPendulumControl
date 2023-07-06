@@ -14,7 +14,7 @@ void MotorDrive::setSpeed(int pwm){
 
     if(pwm >= 0){
         // Direita
-        pwm = pwm + offset;
+        //pwm = pwm + offset;
         if(pwm > 255) pwm = 255;
 
         analogWrite(AIN2, pwm);
@@ -22,7 +22,7 @@ void MotorDrive::setSpeed(int pwm){
     }else{
         //Esquerda
         pwm = -1*pwm;
-        pwm = pwm + offset;
+        //pwm = pwm + offset;
         if(pwm > 255) pwm = 255;
 
         analogWrite(AIN1, pwm);

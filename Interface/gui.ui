@@ -22,7 +22,7 @@
         <bool>true</bool>
        </property>
        <property name="text">
-        <string>67</string>
+        <string>60</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -59,7 +59,7 @@
      <item row="6" column="3">
       <widget class="QLineEdit" name="lineEdit_ki">
        <property name="text">
-        <string>12.5</string>
+        <string>6</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -88,7 +88,7 @@
      <item row="6" column="2">
       <widget class="QLineEdit" name="lineEdit_kd">
        <property name="text">
-        <string>11</string>
+        <string>30</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>

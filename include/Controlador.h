@@ -10,12 +10,13 @@ class Controlador{
     
     float kp, kd, ki;
 
-    float erro_k1, erro_k2, atuation_k1;
+    float erro_k1, erro_k2, atuation_k1, atuation_k2;
 
     public: 
 
         Controlador(float KP, float KD, float KI);
         int PID(float erro);
+        int PD(float erro);
         void setGanhos(float Kp, float Kd, float Ki);
         void resetConditions();
 };

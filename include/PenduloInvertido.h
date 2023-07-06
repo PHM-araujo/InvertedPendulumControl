@@ -29,6 +29,7 @@ class PenduloInvertido
         int dist_max = 273;
         int dist_min = 30;
         int pos_home = 150;
+        
         int dist_min_cd = 50;
         int dist_max_cd = 250;
 
@@ -50,7 +51,6 @@ class PenduloInvertido
         void controle();
         void init();
         bool isStarted();
-        void teste();
         bool outOfRange();
         void stop();
         void returnHome();

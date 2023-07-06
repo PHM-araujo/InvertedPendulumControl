@@ -58,9 +58,9 @@ void PenduloInvertido::returnHome(){
     while(!(pos >= home_inicial and pos <= home_final)){
 
         if(pos > pos_home){
-            motor.setSpeed(125);
+            motor.setSpeed(200);
         }if(pos < pos_home){
-            motor.setSpeed(-125);
+            motor.setSpeed(-200);
         }
 
         delay(5);
@@ -84,11 +84,14 @@ void PenduloInvertido::controle(){
                 
         float erro = ref - leitura;
 
+        // Força no piloto 
 		atuation = controlador.PID(erro);
+        //atuation = controlador.PD(erro);
 
         printInformation();
 
-        motor.setSpeed(atuation);
+        // Converter para pwm
+        //motor.setSpeed(atuation);
 	}
     
 
@@ -99,10 +102,10 @@ void PenduloInvertido::behavior(String msg){
     switch (msg[0])
     {
     case 'I':
-        //start();
+        start();
         //teste_Acomodacao();
         //teste_LeituraAng();
-        teste_PWM();
+        //teste_PWM();
         break;
     case 'P':
         stop();
